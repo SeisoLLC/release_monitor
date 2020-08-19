@@ -8,11 +8,17 @@ import sys
 from argparse import ArgumentParser
 import requests
 
+
 def lambda_handler(event, context):
     """
     AWS Lambda handler
     """
-    check_for_commit(account=event["account"], repository=event["repository"], commitish=event["commit"])
+    print(event)
+    check_for_commit(
+        account=event["queryStringParameters"]["account"],
+        repository=event["queryStringParameters"]["repository"],
+        commitish=event["queryStringParameters"]["commit"],
+    )
 
 
 def main():
@@ -21,14 +27,24 @@ def main():
     """
     config = get_args_config()
 
-    check_for_commit(account=config["account"], repository=config["repository"], commitish=config["commit"])
+    check_for_commit(
+        account=config["account"],
+        repository=config["repository"],
+        commitish=config["commit"],
+    )
 
 
 def check_for_commit(*, account: str, repository: str, commitish: str) -> bool:
     """
     Check a provided account/repo for a commitish
     """
-    url = "https://api.github.com/repos/" + account + "/" + repository + "/releases/latest"
+    url = (
+        "https://api.github.com/repos/"
+        + account
+        + "/"
+        + repository
+        + "/releases/latest"
+    )
     headers = {"Accept": "application/vnd.github.v3+json"}
 
     response = requests.get(url, headers=headers)
@@ -36,10 +52,21 @@ def check_for_commit(*, account: str, repository: str, commitish: str) -> bool:
     try:
         latest_release_sha = latest_release_json["target_commitish"]
     except KeyError:
-        print("Unable to identify the latest release commitish, are you being rate limited?")
+        print(
+            "Unable to identify the latest release commitish, are you being rate limited?"
+        )
         sys.exit(1)
 
-    url = "https://api.github.com/repos/" + account + "/" + repository + "/compare/" + commitish + "..." + latest_release_sha
+    url = (
+        "https://api.github.com/repos/"
+        + account
+        + "/"
+        + repository
+        + "/compare/"
+        + commitish
+        + "..."
+        + latest_release_sha
+    )
 
     response = requests.get(url, headers=headers)
     github_status_json = response.json()
@@ -78,6 +105,7 @@ def create_arg_parser() -> ArgumentParser:
         "--commit", type=str, required=True, help="commitish to monitor for",
     )
     return parser
+
 
 if __name__ == "__main__":
     main()
