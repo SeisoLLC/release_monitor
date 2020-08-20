@@ -18,7 +18,7 @@ make deploy
 ```
 1. Get your REST api ID
 ```bash
-awsdocker "aws apigateway get-rest-apis | jq -r '.[][][\"id\"]'
+awsdocker "aws apigateway get-rest-apis | jq -r '.[][][\"id\"]'"
 ```
 1. Query the lambda via API Gateway.
 ```bash

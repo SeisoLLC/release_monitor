@@ -43,7 +43,7 @@ def main():
     )
 
     response = getattr(requests, method.lower())(url, auth=auth)
-    print("Request sent.  Hope it worked :shrug:")
+    print(f"{response.content}")
 
 
 def get_args_config() -> Dict:

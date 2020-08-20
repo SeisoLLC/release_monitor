@@ -5,6 +5,7 @@ Search GitHub to see if a given commit is in a release
 
 from typing import Dict
 import sys
+import json
 from argparse import ArgumentParser
 import requests
 
@@ -14,11 +15,15 @@ def lambda_handler(event, context):
     AWS Lambda handler
     """
     print(event)
-    check_for_commit(
+    status = check_for_commit(
         account=event["queryStringParameters"]["account"],
         repository=event["queryStringParameters"]["repository"],
         commitish=event["queryStringParameters"]["commit"],
     )
+    response_code = 200
+    body = json.dumps({'status': status})
+    response = {'statusCode': response_code, 'body': body}
+    return response
 
 
 def main():
