@@ -5,7 +5,7 @@ This project uses the unauthenticated GitHub APIs to identify if the provided co
 ## Prereqs
 1. A lambda named "release_monitor", with a "lambda_function.lambda_handler" Handler, and Python 3.8 runtime.
 1. An API Gateway attached to the lambda with AWS_IAM authorization required, named "release_monitor", and "Invoke with caller credentials" enabled.
-1. Successful authentication to AWS with credentials that have access to lambda and API Gateway. For simplicity, we recommend using [environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html). If your environment uses roles, you may want to consider an approach such as [this](https://github.com/JonZeolla/Configs/blob/a524d572a5426b8cfffad3e5e70d300bfd9b8c90/apple/productivity/.zshrc#L159-L186).
+1. Successful authentication to AWS with credentials that have access to lambda and API Gateway. For simplicity, we recommend using [environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html). If your environment uses roles, you may want to consider an approach such as [this](https://github.com/JonZeolla/Configs/blob/15f088ff9a61ba9dffd4912914801692fd37eb60/apple/productivity/.zshrc#L160-L187).
 
 ## Quickstart
 1. Make a reusable alias
