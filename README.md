@@ -1,6 +1,6 @@
 # Release Monitor
 
-This project uses the unauthenticated GitHub APIs to identify if the provided commit is in a stable release for the provided account/repo. It is meant to be run periodically, and send an email notification when a release with the provided commit is detected.
+This project uses the unauthenticated GitHub APIs to identify if the provided commit is in a stable release for the provided account/repo. It is meant to be run periodically to identify when a release with the provided commit is detected.
 
 ## Prereqs
 1. A lambda named "release_monitor", with a "lambda_function.lambda_handler" Handler, and Python 3.8 runtime.
@@ -9,9 +9,11 @@ This project uses the unauthenticated GitHub APIs to identify if the provided co
 1. The project you are looking to monitor uses actual [GitHub releases](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/about-releases), not just tags (which sometimes show in the GitHub web UI as releases).
 
 ## Quickstart
-1. Make a reusable alias
+Ensure all of the [prereqs](#prereqs) are met prior to running these steps.
+
+1. Make a reusable alias.
 ```bash
-alias awsdocker="docker run --rm -it --env-file <(env | grep AWS_) -v \$(pwd):/usr/src/app/ -v \${HOME}/.aws:/root/.aws seiso/easy_infra:latest"
+alias awsdocker="docker run --rm -it --env-file <(env | grep AWS_) -v \$(pwd):/usr/src/app/ -v \${HOME}/.aws:/root/.aws seiso/easy_infra:latest aws"
 ```
 1. Build and deploy the lambda.
 ```bash
@@ -19,7 +21,7 @@ make deploy
 ```
 1. Get your REST api ID
 ```bash
-awsdocker "aws apigateway get-rest-apis | jq -r '.[][][\"id\"]'"
+awsdocker apigateway get-rest-apis | jq -r '.[][]["id"]'
 ```
 1. Query the lambda via API Gateway.
 ```bash
