@@ -16,9 +16,9 @@ def lambda_handler(event, context):
     """
     print(event)
     status = check_for_commit(
-        account=event["queryStringParameters"]["account"],
-        repository=event["queryStringParameters"]["repository"],
-        commitish=event["queryStringParameters"]["commit"],
+        account=event["account"],
+        repository=event["repository"],
+        commitish=event["commit"],
     )
     response_code = 200
     body = json.dumps({'status': status})
