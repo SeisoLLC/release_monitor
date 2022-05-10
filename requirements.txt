@@ -1,5 +1,5 @@
 aws-requests-auth==0.4.3
-botocore==1.24.14
+botocore==1.25.10
 certifi==2021.10.8
 chardet==4.0.0
 docutils==0.18.1
