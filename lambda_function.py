@@ -3,23 +3,34 @@
 Search GitHub to see if a given commit is in a release
 """
 
-from typing import Dict
-import sys
-import json
 from argparse import ArgumentParser
+from typing import Dict
+import json
+import logging
 import requests
+import sys
+
 
 
 def lambda_handler(event, context):
     """
     AWS Lambda handler
     """
-    print(event)
-    status = check_for_commit(
-        account=event["account"],
-        repository=event["repository"],
-        commitish=event["commit"],
-    )
+    # print(event)
+    try:
+        logging.info("Trying API gateway")
+        status = check_for_commit(
+            account=event["queryStringParameters"]["account"],
+            commitish=event["queryStringParameters"]["commit"],
+            repository=event["queryStringParameters"]["repository"],
+        )
+    except:
+        logging.info("Trying json input")
+        status = check_for_commit(
+            account=event["account"],
+            commitish=event["commit"],
+            repository=event["repository"],
+        )
     response_code = 200
     body = json.dumps({'status': status})
     response = {'statusCode': response_code, 'body': body}
