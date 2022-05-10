@@ -16,7 +16,6 @@ def lambda_handler(event, context):
     """
     AWS Lambda handler
     """
-    # print(event)
     try:
         logging.info("Trying API gateway")
         status = check_for_commit(
