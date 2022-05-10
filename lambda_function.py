@@ -24,6 +24,7 @@ def lambda_handler(event, context):
             commitish=event["queryStringParameters"]["commit"],
             repository=event["queryStringParameters"]["repository"],
         )
+        logging.warn("API gateway method failed")
     except:
         logging.info("Trying json input")
         status = check_for_commit(
@@ -31,6 +32,7 @@ def lambda_handler(event, context):
             commitish=event["commit"],
             repository=event["repository"],
         )
+    logging.info("json method succeeded")
     response_code = 200
     body = json.dumps({'status': status})
     response = {'statusCode': response_code, 'body': body}
