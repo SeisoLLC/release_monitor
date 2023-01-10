@@ -13,7 +13,7 @@ Ensure all of the [prereqs](#prereqs) are met prior to running these steps.
 
 1. Make a reusable alias.
 ```bash
-alias awsdocker="docker run --rm -it --env-file <(env | grep AWS_) -v \$(pwd):/usr/src/app/ -v \${HOME}/.aws:/root/.aws seiso/easy_infra:latest aws"
+alias awsdocker="docker run --rm -it --env-file <(env | grep AWS_) -v \$(pwd):/usr/src/app/ -v \${HOME}/.aws:/root/.aws seiso/easy_infra:latest-terraform-aws aws"
 ```
 1. Build and deploy the lambda.
 ```bash
