@@ -4,6 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+requests = "*"
+aws-requests-auth = "*"
+botocore = "*"
 
 [dev-packages]
 bumpversion = "*"

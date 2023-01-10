@@ -9,7 +9,7 @@ ARG VERSION
 ARG COMMIT_HASH
 
 LABEL org.opencontainers.image.title="release_monitor"
-LABEL org.opencontainers.image.description="temp"
+LABEL org.opencontainers.image.description="Monitor project releases for a commit"
 LABEL org.opencontainers.image.version="${VERSION}"
 LABEL org.opencontainers.image.vendor="Seiso"
 LABEL org.opencontainers.image.url="https://seisollc.com"
