@@ -26,4 +26,4 @@ lambda: clean
 
 .PHONY: deploy
 deploy: lambda
-	@docker run --rm --env-file <(env | grep AWS_) -v $$(pwd):/usr/src/app/ -v $${HOME}/.aws:/root/.aws seiso/easy_infra:0.7.0 aws lambda update-function-code --function-name release_monitor --zip-file fileb:///usr/src/app/function.zip
+	@docker run --rm --env-file <(env | grep AWS_) -v $$(pwd):/usr/src/app/ -v $${HOME}/.aws:/root/.aws seiso/easy_infra:latest-terraform-aws aws lambda update-function-code --function-name release_monitor --zip-file fileb:///usr/src/app/function.zip
