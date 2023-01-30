@@ -1,3 +1,5 @@
+This project has been archived; please see its replacement over at [ReleaseHound](https://github.com/SeisoLLC/ReleaseHound)
+
 # Release Monitor
 
 This project uses the unauthenticated GitHub APIs to identify if the provided commit is in a stable release for the provided account/repo. It is meant to be run periodically to identify when a release with the provided commit is detected.
@@ -31,4 +33,3 @@ COMMIT=2315efa04cd4a415916c654f26570a17b9195279
 API_ID=example
 ./client.py --account $ACCOUNT --repository $REPOSITORY --commit $COMMIT --rest-api-id $API_ID
 ```
-
