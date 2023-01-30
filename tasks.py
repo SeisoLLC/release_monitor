@@ -17,6 +17,7 @@ import docker
 import git
 from bumpversion.cli import main as bumpversion
 from invoke import task
+
 from release_monitor import __version__, constants
 
 basicConfig(level="INFO", format=constants.LOG_FORMAT)
@@ -175,7 +176,7 @@ def reformat(_c, debug=False):
         getLogger().setLevel("DEBUG")
 
     entrypoint_and_command = [
-        ("isort", ". --settings-file /action/lib/.automation/.isort.cfg"),
+        ("isort", ". --settings-file /etc/opt/goat/.isort.cfg"),
         ("black", "."),
     ]
     image = "seiso/goat:latest"
@@ -246,8 +247,8 @@ def release(_c, debug=False):
     else:
         latest_release = None
 
-    if latest_release and date_info == latest_release[:7]:
-        increment = str(int(latest_release[8:]) + 1).zfill(2)
+    if latest_release and date_info == latest_release[1:8]:
+        increment = str(int(latest_release[9:]) + 1).zfill(2)
     else:
         increment = "01"
 
@@ -257,16 +258,10 @@ def release(_c, debug=False):
 
 
 @task
-def publish(_c, tag, debug=False):
+def publish(_c, debug=False):
     """Publish release_monitor"""
     if debug:
         getLogger().setLevel("DEBUG")
-
-    if tag not in ["latest", "release"]:
-        LOG.error("Please provide a tag of either latest or release")
-        sys.exit(1)
-    elif tag == "release":
-        tag = f"v{__version__}"
     raise NotImplementedError()
 
 
